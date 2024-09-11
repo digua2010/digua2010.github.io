@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
-    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="icon" href="/images/head1.jpg" />
     <link rel="preconnect" href="https://s4.zstatic.net" />
 <script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
 <link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -34,6 +34,11 @@
 />
 <script src="/js/lib/highlight.js"></script>
 
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
 
 
 <script src="/js/lib/preview.js"></script>
@@ -156,7 +161,7 @@
     <div
         id="home-background"
         ref="homeBackground"
-        data-images="/images/background.jpg"
+        data-images="/images/b1.jpg,/images/b2.png,/images/b3.png,/images/b4.png,/images/b5.png,/images/b6.jpg,/images/b7.jpg,/images/b8.jpg,/images/b9.jpg"
     ></div>
     <div id="home-info" @click="homeClick">
         <span class="loop"></span>
@@ -181,39 +186,6 @@
         
 
 <div class="post">
-    <a href="/2024/09/10/02/">
-        <h2 class="post-title">c++-格雷码</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/9/10
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>oi wiki原文:<a target="_blank" rel="noopener" href="https://oi-wiki.org/misc/gray-code/">链接</a></p>
-<p>洛谷例题:<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5657">链接</a></p>
-<h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><p><img src="/images/01.png" alt="格雷码定义" title="OI WIKI详解-格雷码"></p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2024/09/10/02/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
     <a href="/2024/08/27/01/">
         <h2 class="post-title">c++-类</h2>
     </a>
@@ -227,70 +199,15 @@
         </span>
         
         
+        <span class="special">
+            <i class="fa-solid fa-grip-vertical fa-fw"></i>
+        </span>
+        
     </div>
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="类"><a href="#类" class="headerlink" title="类"></a>类</h1><p>oi wiki原文:<a target="_blank" rel="noopener" href="https://oi-wiki.org/lang/class/">链接</a></p>
-<h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><ol>
-<li>结构体属于类的一种，因某些原因被c++保留</li>
-<li>类是结构体的拓展，其区别在于增加了成员函数</li>
-</ol>
-<pre><code class="类.例子">// Example:
-class Object &#123;
- public:
-  int weight;
-  int value;
-&#125; e[array_length];
-</code></pre>
-<p>与使用 struct 大同小异。该例定义了一个名为 Object 的类。该类拥有两个成员元素，分别为 weight,value；并在 } 后使用该类型定义了一个数组 e。</p>
-<h2 id="访问说明符"><a href="#访问说明符" class="headerlink" title="访问说明符"></a>访问说明符</h2><ul>
-<li>public：该访问说明符之后的各个成员都可以被公开访问，简单来说就是无论 类内 还是 类外 都可以访问。</li>
-<li>protected：该访问说明符之后的各个成员可以被 类内、派生类或者友元的成员访问，但类外 不能访问。</li>
-<li>private：该访问说明符之后的各个成员 只能 被 类内 成员或者友元的成员访问，不能 被从类外或者派生类中访问。</li>
-</ul>
-<pre><code class="注意">对于 struct，它的所有成员都是默认 public。对于 class，它的所有成员都是默认 private。
-</code></pre>
-<p>关于友元以及派生类的基本概念</p>
-<p>友元（friend）：使用 friend 关键字修饰某个函数或者类。可以使得在 被修饰者 在不成为成员函数或者成员类的情况下，访问该类的私有（private）或者受保护（protected）成员。简单来说就是只要带有这个类的 friend 标记，就可以访问私有或受保护的成员元素。</p>
-<p>派生类（derived class）：C++ 允许使用一个类作为 基类，并通过基类 派生 出 派生类。其中派生类（根据特定规则）继承基类中的成员变量和成员函数。可以提高代码的复用率。</p>
-<p>派生类似 “is” 的关系。如猫（派生类）”is” 哺乳动物（基类）。</p>
-<p>对于上面 private 和 protected 的区别，可以看做派生类可以访问基类的 protected 的元素（public 同），但不能访问 private 元素。</p>
-<p><strong>什么意思呢？</strong>我阐述一下我自己的观点：</p>
-<pre><code class="实例1">class digua2010 &#123;
-    private:
-        int a = 1;
-        bool b = 1;
-    public:
-     	void print()&#123;
-         	cout &lt;&lt; a;
-        &#125;
-&#125;;
-digua2010 edge;
-int main() &#123;
-    edge.print();
-    return 0;
-&#125;
-</code></pre>
-<p>这里我在类内调用print函数，可以成功访问private类型的a并输出</p>
-<pre><code class="实例2">class digua2010 &#123;
-    private:
-        int a = 1;
-        bool b = 1;
-    public:
-     	void print()&#123;
-         	cout &lt;&lt; a;
-        &#125;
-&#125;;
-digua2010 edge;
-int main() &#123;
-    cout &lt;&lt; edge.a;
-    return 0;
-&#125;
-</code></pre>
-<p>而这个程序就会报错“*[Error] ‘int digua2010::a’ is private within this context*”</p>
-<p>为什么？因为a我们设置了private类型，该类型不支持从类外访问。所以我们从主函数直接访问edge.a就出错了。</p>
-<p>由于csp不会真的去考友元以及派生类的代码，所以了解其定义就可以了。</p>
+            <p>类的基本考点及个人感想 Normal <em>Italic</em> <strong>Strong</strong></p>
 
             
         </div>
@@ -301,6 +218,41 @@ int main() &#123;
         
     </div>
     <a href="/2024/08/27/01/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2024/09/10/02/">
+        <h2 class="post-title">c++-格雷码</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/9/10
+        </span>
+        
+        
+        <span class="special">
+            <i class="fa-solid fa-grip-vertical fa-fw"></i>
+        </span>
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>格雷码的定义及构造方法 Normal <em>Italic</em> <strong>Strong</strong></p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+        
+    </div>
+    <a href="/2024/09/10/02/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -317,23 +269,15 @@ int main() &#123;
         </span>
         
         
+        <span class="special">
+            <i class="fa-solid fa-grip-vertical fa-fw"></i>
+        </span>
+        
     </div>
     <div class="description">
         <div class="content" v-pre>
             
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+            <p>文章的初始格式 Normal <em>Italic</em> <strong>Strong</strong></p>
 
             
         </div>
@@ -362,11 +306,11 @@ int main() &#123;
         <div id="card-style">
     <div id="card-div">
         <div class="avatar">
-            <img src="/images/avatar.jpg" alt="avatar" />
+            <img src="/images/head1.jpg" alt="avatar" />
         </div>
         <div class="name">digua2010</div>
         <div class="description">
-            <p>Description<br>…</p>
+            <p>将blog给予时光长河<br>—— 最终的我，最初的你。</p>
 
         </div>
         
@@ -375,6 +319,10 @@ int main() &#123;
             
             <div class="friend-link">
                 <a target="_blank" rel="noopener" href="https://argvchs.github.io">Argvchs</a>
+            </div>
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://blog.mhxma.tech">mhxma</a>
             </div>
             
         </div>
@@ -390,7 +338,7 @@ int main() &#123;
     <div id="footer-wrap">
         <div>
             &copy;
-            2022 - 2024 digua2010 blog
+            2024 - 2024 digua2010 blog
             <span id="footer-icon">
                 <i class="fa-solid fa-font-awesome fa-fw"></i>
             </span>
