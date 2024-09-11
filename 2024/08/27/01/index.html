@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>Archives | digua2010 blog</title>
+    <title>c++-类 | digua2010 blog</title>
     <meta name="author" content="digua2010" />
     <meta name="description" content="the thinking about me" />
     <meta name="keywords" content="blog" />
@@ -37,6 +37,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -150,54 +154,91 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            
-<div id="archives">
-    
-    <div id="timeline-wrap" ref="timeline">
+            <div class="article">
+    <div>
+        <h1>c++-类</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/8/27
+        </span>
         
-        <div class="timeline" data-title="helloworld">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/8/27</div>
-                <a href="/2024/08/27/hello-world/">
-                    <h3>Hello World</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="c++-类">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/8/27</div>
-                <a href="/2024/08/27/01/">
-                    <h3>c++-类</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="c++-格雷码">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/9/10</div>
-                <a href="/2024/09/10/02/">
-                    <h3>c++-格雷码</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
         
     </div>
+    
+    <div class="content" v-pre>
+        <h1 id="类"><a href="#类" class="headerlink" title="类"></a>类</h1><p>oi wiki原文:<a target="_blank" rel="noopener" href="https://oi-wiki.org/lang/class/">链接</a></p>
+<h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><ol>
+<li>结构体属于类的一种，因某些原因被c++保留</li>
+<li>类是结构体的拓展，其区别在于增加了成员函数</li>
+</ol>
+<pre><code class="类.例子">// Example:
+class Object &#123;
+ public:
+  int weight;
+  int value;
+&#125; e[array_length];
+</code></pre>
+<p>与使用 struct 大同小异。该例定义了一个名为 Object 的类。该类拥有两个成员元素，分别为 weight,value；并在 } 后使用该类型定义了一个数组 e。</p>
+<h2 id="访问说明符"><a href="#访问说明符" class="headerlink" title="访问说明符"></a>访问说明符</h2><ul>
+<li>public：该访问说明符之后的各个成员都可以被公开访问，简单来说就是无论 类内 还是 类外 都可以访问。</li>
+<li>protected：该访问说明符之后的各个成员可以被 类内、派生类或者友元的成员访问，但类外 不能访问。</li>
+<li>private：该访问说明符之后的各个成员 只能 被 类内 成员或者友元的成员访问，不能 被从类外或者派生类中访问。</li>
+</ul>
+<pre><code class="注意">对于 struct，它的所有成员都是默认 public。对于 class，它的所有成员都是默认 private。
+</code></pre>
+<p>关于友元以及派生类的基本概念</p>
+<p>友元（friend）：使用 friend 关键字修饰某个函数或者类。可以使得在 被修饰者 在不成为成员函数或者成员类的情况下，访问该类的私有（private）或者受保护（protected）成员。简单来说就是只要带有这个类的 friend 标记，就可以访问私有或受保护的成员元素。</p>
+<p>派生类（derived class）：C++ 允许使用一个类作为 基类，并通过基类 派生 出 派生类。其中派生类（根据特定规则）继承基类中的成员变量和成员函数。可以提高代码的复用率。</p>
+<p>派生类似 “is” 的关系。如猫（派生类）”is” 哺乳动物（基类）。</p>
+<p>对于上面 private 和 protected 的区别，可以看做派生类可以访问基类的 protected 的元素（public 同），但不能访问 private 元素。</p>
+<p><strong>什么意思呢？</strong>我阐述一下我自己的观点：</p>
+<pre><code class="实例1">class digua2010 &#123;
+    private:
+        int a = 1;
+        bool b = 1;
+    public:
+     	void print()&#123;
+         	cout &lt;&lt; a;
+        &#125;
+&#125;;
+digua2010 edge;
+int main() &#123;
+    edge.print();
+    return 0;
+&#125;
+</code></pre>
+<p>这里我在类内调用print函数，可以成功访问private类型的a并输出</p>
+<pre><code class="实例2">class digua2010 &#123;
+    private:
+        int a = 1;
+        bool b = 1;
+    public:
+     	void print()&#123;
+         	cout &lt;&lt; a;
+        &#125;
+&#125;;
+digua2010 edge;
+int main() &#123;
+    cout &lt;&lt; edge.a;
+    return 0;
+&#125;
+</code></pre>
+<p>而这个程序就会报错“*[Error] ‘int digua2010::a’ is private within this context*”</p>
+<p>为什么？因为a我们设置了private类型，该类型不支持从类外访问。所以我们从主函数直接访问edge.a就出错了。</p>
+<p>由于csp不会真的去考友元以及派生类的代码，所以了解其定义就可以了。</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
 </div>
 
             <footer id="footer">
@@ -228,6 +269,12 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>
