@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>c++-格雷码 | digua2010 blog</title>
+    <title>blog介绍 | digua2010 blog</title>
     <meta name="author" content="digua2010" />
     <meta name="description" content="the thinking about me" />
     <meta name="keywords" content="blog" />
@@ -161,66 +161,29 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>c++-格雷码</h1>
+        <h1>blog介绍</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2024/9/10
+            2024/9/18
         </span>
         
         
     </div>
     
     <div class="content" v-pre>
-        <p>oi wiki原文:<a target="_blank" rel="noopener" href="https://oi-wiki.org/misc/gray-code/">链接</a></p>
-<p>洛谷例题:<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5657">链接</a></p>
-<h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><p><img src="/images/0201.png" alt="格雷码定义" title="OI WIKI详解-格雷码"></p>
-<h2 id="构造格雷码"><a href="#构造格雷码" class="headerlink" title="构造格雷码"></a>构造格雷码</h2><p>我们先来讲一下构造的方法再讲为什么吧。不然除非你拥有发明这种算法的实力。。<br>大佬当我什么都没说（好像大佬也刷不到这个蒟蒻的blog</p>
-<h3 id="手动构造"><a href="#手动构造" class="headerlink" title="手动构造"></a>手动构造</h3><p>k 位的格雷码可以通过以下方法构造。我们从全 0 格雷码开始，按照下面策略：<br>翻转最低位得到下一个格雷码，（例如 000\to 001）；<br>把最右边的 1 的左边的位翻转得到下一个格雷码，（例如 001\to 011）；</p>
-<p>交替按照上述策略生成 2^{k-1} 次，可得到 k 位的格雷码序列。</p>
-<p>为什么这么做呢？就相当于十进制1 ~ 2^k， 把每一位转化成对应格雷码就是这样了。<br>那为什么十进制这么转化成格雷码？请看下文正确性证明。</p>
-<h3 id="镜像构造"><a href="#镜像构造" class="headerlink" title="镜像构造"></a>镜像构造</h3><p><img src="/images/0202.png" alt="镜像构造格雷码" title="镜像构造"></p>
-<p>这个方法是我最推荐的，最为简单的。</p>
-<p>他原文是这样的：“k 位的格雷码可以从 k-1 位的格雷码以上下镜射后加上新位的方式快速得到”</p>
-<p>人话来说，就例如图片里k &#x3D; 2编程k &#x3D; 3，就把k &#x3D; 2的格雷码先照搬过来，再把它反着写一遍跟在原来的后面，最后原来的前面加个零0后面的加一个1，就变成k &#x3D; 3的格雷码了。</p>
-<p>原理：蒟蒻也不知道诶，可能就是单纯的找规律吧~（试图萌混过关</p>
-<h2 id="格雷码转二进制"><a href="#格雷码转二进制" class="headerlink" title="格雷码转二进制"></a>格雷码转二进制</h2><p><img src="/images/0203.png" alt="计算方法" title="计算方法"></p>
-<p><img src="/images/0204.png" alt="格雷码表" title="格雷码表"></p>
-<p>看不懂？很正常。因为我也看不懂。。。太抽象了。</p>
-<p>直接看代码也许还会好理解一点怎么做：</p>
-<pre><code class="代码">int g(int n) &#123; return n ^ (n &gt;&gt; 1); &#125;
-</code></pre>
-<p>代码很简单吧？假设二进制1011要转换成对应格雷码，就右移一位（除以2）并与其异或。<br>大概是这样的：</p>
-<pre><code class="实例">1011 -&gt; 101
-101 ^ 1011 = 1110
-</code></pre>
-<h2 id="正确性证明"><a href="#正确性证明" class="headerlink" title="正确性证明"></a>正确性证明</h2><p>关于这个我专门录了一期视频，个人感觉还是讲的挺详细的，可能有的时候结巴了一点（对不起</p>
-<h3 id="讲解视频"><a href="#讲解视频" class="headerlink" title="讲解视频"></a><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Xe4HeVEZ1/?vd_source=4b5488a3ebd407b02944e0df699e293d">讲解视频</a></h3><p>然后OI WIKI上的解释是这样的：</p>
-<p><img src="/images/0205.png" alt="OI WIKI证明"></p>
-<p>很抽象，建议看我视频然后点赞的说（企图萌混过关</p>
-<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><h3 id="洛谷例题"><a href="#洛谷例题" class="headerlink" title="洛谷例题"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5657">洛谷例题</a></h3><pre><code class="代码">#include &lt;bits/stdc++.h&gt;
-using namespace std;
-
-unsigned long long n = 5, k;
-int main() &#123;
-    cin &gt;&gt; n &gt;&gt; k;
-    k ^= k &gt;&gt; 1;
-    for (int i = n - 1; i &gt;= 0; i--) &#123;
-        cout &lt;&lt; (k&gt;&gt;i&amp;1);
-    &#125;
-
-    return 0;
-&#125;
-</code></pre>
-<p>当然题解第一篇是最优解，但我觉得这样好理解一些。</p>
-<p>首先，输入n,k，再讲十进制k转换为对应的格雷码</p>
-<p>然后，从n-1位到第0为遍历输出</p>
-<p>最后就没有啦，很简单把.^.</p>
-<p>如果有不理解的地方那应该只能是k转换为格雷码，那么建议看一下我的15min视频.^.</p>
-<p>再见啦~本文用一个星期零零散散地写完，希望大家喜欢</p>
+        <h2 id="建站原因"><a href="#建站原因" class="headerlink" title="建站原因"></a>建站原因</h2><p>很简单，个人的一时兴起，或者说对此事的某种程度的热爱。</p>
+<p>正如同永远无法阐述为什么而活，我也不能很清楚地告诉你我为什么喜欢鼓捣小网站。</p>
+<p>也许是分享的欲望太强烈吧。。。我希望大家可以看到我的想法，并与我交流</p>
+<h2 id="希冀"><a href="#希冀" class="headerlink" title="希冀"></a>希冀</h2><p>可惜我不是技术大佬，只是一个默默无闻的小菜鸡。我不太喜欢一直整一个技术，所以不会对某一方面特别了解。</p>
+<p>但还是希望将学习的日程与经验与大家分享，希望得到点赞~（虽然压根没做这个交互按钮</p>
+<h2 id="我"><a href="#我" class="headerlink" title="我"></a>我</h2><p>我，性别不详，刚满十八岁，体重四十吨，一拳一个哥斯拉。</p>
+<p>家在东胜神洲花果山洞天福地，目前为猴山集团的二把手。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>感谢各位看到这里，本小站只是时间长河中的过往云烟，正如暮雨终将落下，它亦有消散的那一天。</p>
+<p>我将于2024&#x2F;9&#x2F;18&#x2F;22:23 时间戳于大家会面，看到过去的我，映照最初的你。</p>
 
     </div>
     
